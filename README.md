@@ -1,5 +1,5 @@
 # Telegram Desktop Luminarcy
-This fork have some interface improvements such as:
+This fork has some interface improvements such as:
 * Disable Badge setting
 
 # [Telegram Desktop][telegram_desktop] – Official Messenger
