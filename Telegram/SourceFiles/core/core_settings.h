@@ -190,6 +190,12 @@ public:
 	void setNotificationsCorner(ScreenCorner corner) {
 		_notificationsCorner = corner;
 	}
+	[[nodiscard]] bool disableBadge() const {
+		return _disableBadge;
+	}
+	void setDisableBadge(bool value) {
+		_disableBadge = value;
+	}
 	[[nodiscard]] bool includeMutedCounter() const {
 		return _includeMutedCounter;
 	}
@@ -658,6 +664,7 @@ private:
 	std::optional<bool> _nativeNotifications;
 	int _notificationsCount = 3;
 	ScreenCorner _notificationsCorner = ScreenCorner::BottomRight;
+	bool _disableBadge = false;
 	bool _includeMutedCounter = true;
 	bool _countUnreadMessages = true;
 	rpl::variable<bool> _notifyAboutPinned = true;

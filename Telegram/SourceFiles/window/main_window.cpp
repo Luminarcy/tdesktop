@@ -647,7 +647,10 @@ void MainWindow::updateUnreadCounter() {
 		return;
 	}
 
-	const auto counter = Core::App().unreadBadge();
+	auto counter = Core::App().unreadBadge();
+	if (Core::App().settings().disableBadge()) {
+		counter = 0;
+	}
 	setTitle((counter > 0) ? qsl("Telegram (%1)").arg(counter) : qsl("Telegram"));
 
 	unreadCounterChangedHook();

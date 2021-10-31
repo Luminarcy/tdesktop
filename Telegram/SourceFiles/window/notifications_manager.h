@@ -46,6 +46,7 @@ enum class ManagerType {
 enum class ChangeType {
 	SoundEnabled,
 	FlashBounceEnabled,
+	DisableBadge,
 	IncludeMuted,
 	CountMessages,
 	DesktopEnabled,

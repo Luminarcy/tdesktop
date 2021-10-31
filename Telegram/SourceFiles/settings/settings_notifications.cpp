@@ -686,6 +686,9 @@ void SetupNotificationsContent(
 	AddSkip(container, st::settingsCheckboxesSkip);
 	AddSubsectionTitle(container, tr::lng_settings_badge_title());
 
+	const auto disableBadge = addCheckbox(
+		tr::lng_settings_disable_badge(tr::now),
+		settings.disableBadge());
 	const auto muted = addCheckbox(
 		tr::lng_settings_include_muted(tr::now),
 		settings.includeMutedCounter());
@@ -796,6 +799,14 @@ void SetupNotificationsContent(
 		Core::App().settings().setFlashBounceNotify(checked);
 		changed(Change::FlashBounceEnabled);
 	}, flashbounce->lifetime());
+
+	disableBadge->checkedChanges(
+	) | rpl::filter([=](bool checked) {
+		return (checked != Core::App().settings().disableBadge());
+	}) | rpl::start_with_next([=](bool checked) {
+		Core::App().settings().setDisableBadge(checked);
+		changed(Change::DisableBadge);
+	}, disableBadge->lifetime());
 
 	muted->checkedChanges(
 	) | rpl::filter([=](bool checked) {

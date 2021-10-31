@@ -107,6 +107,7 @@ void SessionSettings::addFromSerialized(const QByteArray &serialized) {
 	qint32 supportFixChatsOrder = _supportFixChatsOrder ? 1 : 0;
 	qint32 supportTemplatesAutocomplete = _supportTemplatesAutocomplete ? 1 : 0;
 	qint32 supportChatsTimeSlice = _supportChatsTimeSlice.current();
+	qint32 appDisableBadge = app.disableBadge() ? 1 : 0;
 	qint32 appIncludeMutedCounter = app.includeMutedCounter() ? 1 : 0;
 	qint32 appCountUnreadMessages = app.countUnreadMessages() ? 1 : 0;
 	qint32 appExeLaunchWarning = app.exeLaunchWarning() ? 1 : 0;
@@ -409,6 +410,7 @@ void SessionSettings::addFromSerialized(const QByteArray &serialized) {
 		case Ui::InputSubmitSettings::Enter:
 		case Ui::InputSubmitSettings::CtrlEnter: app.setSendSubmitWay(uncheckedSendSubmitWay); break;
 		}
+		app.setDisableBadge(appDisableBadge == 1);
 		app.setIncludeMutedCounter(appIncludeMutedCounter == 1);
 		app.setCountUnreadMessages(appCountUnreadMessages == 1);
 		app.setExeLaunchWarning(appExeLaunchWarning == 1);

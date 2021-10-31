@@ -162,6 +162,7 @@ QByteArray Settings::serialize() const {
 		stream
 			<< qint32(_sendFilesWay.serialize())
 			<< qint32(_sendSubmitWay)
+			<< qint32(_disableBadge ? 1 : 0)
 			<< qint32(_includeMutedCounter ? 1 : 0)
 			<< qint32(_countUnreadMessages ? 1 : 0)
 			<< qint32(_exeLaunchWarning ? 1 : 0)
@@ -262,6 +263,7 @@ void Settings::addFromSerialized(const QByteArray &serialized) {
 	base::flat_map<QString, QString> soundOverrides;
 	qint32 sendFilesWay = _sendFilesWay.serialize();
 	qint32 sendSubmitWay = static_cast<qint32>(_sendSubmitWay);
+	qint32 disableBadge = _disableBadge ? 1 : 0;
 	qint32 includeMutedCounter = _includeMutedCounter ? 1 : 0;
 	qint32 countUnreadMessages = _countUnreadMessages ? 1 : 0;
 	qint32 exeLaunchWarning = _exeLaunchWarning ? 1 : 0;
@@ -342,6 +344,7 @@ void Settings::addFromSerialized(const QByteArray &serialized) {
 		stream
 			>> sendFilesWay
 			>> sendSubmitWay
+			>> disableBadge
 			>> includeMutedCounter
 			>> countUnreadMessages
 			>> exeLaunchWarning
@@ -504,6 +507,7 @@ void Settings::addFromSerialized(const QByteArray &serialized) {
 	case ScreenCorner::BottomRight:
 	case ScreenCorner::BottomLeft: _notificationsCorner = uncheckedNotificationsCorner; break;
 	}
+	_disableBadge = (disableBadge == 1);
 	_includeMutedCounter = (includeMutedCounter == 1);
 	_countUnreadMessages = (countUnreadMessages == 1);
 	_notifyAboutPinned = (notifyAboutPinned == 1);
@@ -522,6 +526,7 @@ void Settings::addFromSerialized(const QByteArray &serialized) {
 	case Ui::InputSubmitSettings::Enter:
 	case Ui::InputSubmitSettings::CtrlEnter: _sendSubmitWay = uncheckedSendSubmitWay; break;
 	}
+	_disableBadge = (disableBadge == 1);
 	_includeMutedCounter = (includeMutedCounter == 1);
 	_countUnreadMessages = (countUnreadMessages == 1);
 	_exeLaunchWarning = (exeLaunchWarning == 1);
@@ -811,6 +816,7 @@ void Settings::resetOnLastLogout() {
 	//_nativeNotifications = std::nullopt;
 	//_notificationsCount = 3;
 	//_notificationsCorner = ScreenCorner::BottomRight;
+	_disableBadge = false;
 	_includeMutedCounter = true;
 	_countUnreadMessages = true;
 	_notifyAboutPinned = true;

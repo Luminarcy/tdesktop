@@ -325,7 +325,10 @@ void MainWindow::unreadCounterChangedHook() {
 }
 
 void MainWindow::updateIconCounters() {
-	const auto counter = Core::App().unreadBadge();
+	auto counter = Core::App().unreadBadge();
+	if (Core::App().settings().disableBadge()) {
+		counter = 0;
+	}
 	const auto muted = Core::App().unreadBadgeMuted();
 
 	auto iconSizeSmall = QSize(GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON));

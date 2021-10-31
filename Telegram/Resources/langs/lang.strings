@@ -327,6 +327,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 "lng_settings_alert_mac" = "Bounce the dock icon";
 "lng_settings_alert_linux" = "Draw attention to the window";
 "lng_settings_badge_title" = "Badge counter";
+"lng_settings_disable_badge" = "Disable Badge";
 "lng_settings_include_muted" = "Include muted chats in unread count";
 "lng_settings_count_unread" = "Count unread messages";
 "lng_settings_events_title" = "Events";
